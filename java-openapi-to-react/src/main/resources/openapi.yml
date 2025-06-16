@@ -1,0 +1,490 @@
+openapi: 3.0.3
+info:
+  title: User API
+  version: "1.0"
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor de Desarrollo
+    x-environment: development
+  - url: https://api.test.ejemplo.com
+    description: Servidor de Pruebas
+    x-environment: testing
+  - url: https://api.ejemplo.com
+    description: Servidor de Producción
+    x-environment: production
+
+paths:
+  # Endpoints para Books
+  /books:
+    get:
+      operationId: getBooks
+      summary: Obtener lista de libros
+      responses:
+        '200':
+          description: Lista de libros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      operationId: createBook
+      summary: Crear un nuevo libro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Libro creado
+
+  /books/{id}:
+    get:
+      operationId: getBookById
+      summary: Obtener libro por ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del libro
+      responses:
+        '200':
+          description: Libro encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    put:
+      operationId: updateBook
+      summary: Actualizar libro existente
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del libro a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Libro actualizado
+    delete:
+      operationId: deleteBook
+      summary: Eliminar libro
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del libro a eliminar
+      responses:
+        '204':
+          description: Libro eliminado
+
+  # Endpoints para Users
+  /users:
+    get:
+      operationId: getUsers
+      summary: Obtener lista de usuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      operationId: createUser
+      summary: Crear un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Usuario creado
+
+  /users/{id}:
+    get:
+      operationId: getUserById
+      summary: Obtener usuario por ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del usuario
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      operationId: updateUser
+      summary: Actualizar usuario existente
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del usuario a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Usuario actualizado
+    delete:
+      operationId: deleteUser
+      summary: Eliminar usuario
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del usuario a eliminar
+      responses:
+        '204':
+          description: Usuario eliminado
+
+  # Endpoints para Authors
+  /authors:
+    get:
+      operationId: getAuthors
+      summary: Obtener lista de autores
+      responses:
+        '200':
+          description: Lista de autores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    post:
+      operationId: createAuthor
+      summary: Crear un nuevo autor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '201':
+          description: Autor creado
+
+  /authors/{id}:
+    get:
+      operationId: getAuthorById
+      summary: Obtener autor por ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del autor
+      responses:
+        '200':
+          description: Autor encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    put:
+      operationId: updateAuthor
+      summary: Actualizar autor existente
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del autor a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: Autor actualizado
+    delete:
+      operationId: deleteAuthor
+      summary: Eliminar autor
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del autor a eliminar
+      responses:
+        '204':
+          description: Autor eliminado
+
+  # Endpoints para Editorials
+  /editorials:
+    get:
+      operationId: getEditorials
+      summary: Obtener lista de editoriales
+      responses:
+        '200':
+          description: Lista de editoriales
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Editorial'
+    post:
+      operationId: createEditorial
+      summary: Crear una nueva editorial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Editorial'
+      responses:
+        '201':
+          description: Editorial creada
+
+  /editorials/{id}:
+    get:
+      operationId: getEditorialById
+      summary: Obtener editorial por ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID de la editorial
+      responses:
+        '200':
+          description: Editorial encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Editorial'
+    put:
+      operationId: updateEditorial
+      summary: Actualizar editorial existente
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID de la editorial a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Editorial'
+      responses:
+        '200':
+          description: Editorial actualizada
+    delete:
+      operationId: deleteEditorial
+      summary: Eliminar editorial
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID de la editorial a eliminar
+      responses:
+        '204':
+          description: Editorial eliminada
+
+  # Endpoints para Categories
+  /categories:
+    get:
+      operationId: getCategories
+      summary: Obtener lista de categorías
+      responses:
+        '200':
+          description: Lista de categorías
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    post:
+      operationId: createCategory
+      summary: Crear una nueva categoría
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Categoría creada
+
+  /categories/{id}:
+    get:
+      operationId: getCategoryById
+      summary: Obtener categoría por ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID de la categoría
+      responses:
+        '200':
+          description: Categoría encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    put:
+      operationId: updateCategory
+      summary: Actualizar categoría existente
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID de la categoría a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Categoría actualizada
+    delete:
+      operationId: deleteCategory
+      summary: Eliminar categoría
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID de la categoría a eliminar
+      responses:
+        '204':
+          description: Categoría eliminada
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+          format: email
+        birthdate:
+          type: string
+          format: date
+      required:
+        - name
+        - surname
+        - email
+
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        surname:
+          type: string
+        phone:
+          type: string
+      required:
+        - name
+        - surname
+        - phone
+
+    Editorial:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        address:
+          type: string
+      required:
+        - name
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        description:
+          type: string
+      required:
+        - description
+
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+        category:
+          $ref: '#/components/schemas/Category'
+        author:
+          $ref: '#/components/schemas/Author'
+        editorial:
+          $ref: '#/components/schemas/Editorial'
+      required:
+        - title
+        - category
+        - author
+        - editorial

@@ -1,0 +1,20 @@
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  main.content {
+    flex: 1;
+    /* opcional: padding y responsive */
+    padding: 1rem;
+  }
+  .col-actions {
+    width: 120px;
+  }
+  .col-actions .btn-group-sm .btn + .btn {
+    margin-left: 0.5rem;
+  }
